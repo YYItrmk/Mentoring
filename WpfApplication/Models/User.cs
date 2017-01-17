@@ -21,7 +21,6 @@
 
     public class Weahter
     {
-
         public string City { get; set; }
 
         public string TODAY { get; set; }
@@ -31,6 +30,7 @@
     
     public class News
     {
+        //できない
         public string[] Title { get; set; }
         public string[] URL { get; set; }
     }
