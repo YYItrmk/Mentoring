@@ -29,30 +29,22 @@
             */
             this.Weahter = new List<Weahter>()
             {
-                new Weahter(){City = "東京", TODAY = GetTodayWeahter(4410),TOMORROW = GetTomorrowWeater(4410)},
-                new Weahter(){City = "札幌", TODAY = GetTodayWeahter(1400),TOMORROW = GetTomorrowWeater(4410)}
+                new Weahter(){City = "東京", TODAY = GetWeahter(4410,1),TOMORROW = GetWeahter(4410,2)},
+                new Weahter(){City = "札幌", TODAY = GetWeahter(1400,1),TOMORROW = GetWeahter(1400,2)}
             };
 
             this.News = new List<News>()
             {
-                new News(){Title=GetNewsTitle(),URL = GetNewsLink()}
+                new News(){Title=GetNews("title"),URL = GetNews("link")}
             };
         }
 
-        //今日の天気を取得する
-        private string GetTodayWeahter(int CityCode)
+        //天気を取得する
+        private string GetWeahter(int cityCode,int day)
         {
-            var results = GetWeatherReportFromYahoo(CityCode);
-            var Weather = results.ElementAt<string>(1).Split('】');
-            return Weather[1];
-        }
-
-        //明日の天気
-        private string GetTomorrowWeater(int CityCode)
-        {
-            var results = GetWeatherReportFromYahoo(CityCode);
-            var Weather = results.ElementAt<string>(2).Split('】');
-            return Weather[1];
+            var results = GetWeatherReportFromYahoo(cityCode);
+            var Weather = results.ElementAt<string>(day).Split('】');
+            return Weather[1].Replace(" - "," ");
         }
 
         /// <summary>
@@ -85,7 +77,7 @@
             }
         }
 
-        private  string[] GetNewsTitle()
+        private string[] GetNews(string name)
         {
             WebClient wc = new WebClient();
             wc.Headers.Add("Content-type", "charset=UTF-8");
@@ -95,44 +87,20 @@
 
             XDocument xdoc = XDocument.Parse(result);
 
-            var nodes = xdoc.Root.Descendants("title");
-            
-             List<string> title = new List<string>();
-           
-            foreach (var node in nodes)
-            {
-                title.Add(node.Value);
-            }
+            var nodes = xdoc.Root.Descendants(name);
 
-            title.RemoveAt(0);
-
-            string[] strTitle = title.ToArray();
-            return strTitle;
-
-        }
-
-        private string[] GetNewsLink()
-        {
-            WebClient wc = new WebClient();
-
-            wc.Headers.Add("Content-type", "charset=UTF-8");
-            Uri url = new Uri(@"http://news.yahoo.co.jp/pickup/rss.xml");
-            string result = wc.DownloadString(url);
-
-            XDocument xdoc = XDocument.Parse(result);
-
-            var nodes = xdoc.Root.Descendants("link");
-            List<string> link = new List<string>();
+            List<string> newsItems = new List<string>();
 
             foreach (var node in nodes)
             {
-                link.Add(node.Value);
+                newsItems.Add(node.Value);
             }
 
-            link.RemoveAt(0);
+            newsItems.RemoveAt(0);
 
-            string[] strLink = link.ToArray();
-            return strLink;
+            string[] newsItem = newsItems.ToArray();
+            return newsItem;
+
         }
     }
 }
