@@ -19,14 +19,6 @@
 
         public MainViewModel()
         {
-            /*
-            this.UserList = new List<User>()
-            {
-                new User(){Id = 1, DisplayName = "Tsuyoshi Tanaka", Age = 28},
-                new User(){Id = 2, DisplayName = "Onishi Kenji", Age = 24},
-                new User(){Id = 3, DisplayName = "Suzuki Shyun", Age = 25}
-            };
-            */
             this.Weahter = new List<Weahter>()
             {
                 new Weahter(){City = "東京", TODAY = GetWeahter(4410,1),TOMORROW = GetWeahter(4410,2)},
