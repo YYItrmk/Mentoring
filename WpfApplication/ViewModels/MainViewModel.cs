@@ -11,8 +11,6 @@
 
     public class MainViewModel
     {
-        public List<User> UserList { get; set; }
-
         public List<Weahter> Weahter { get; set; }
 
         public List<News> News { get; set; }
@@ -25,9 +23,19 @@
                 new Weahter(){City = "札幌", TODAY = GetWeahter(1400,1),TOMORROW = GetWeahter(1400,2)}
             };
 
+            var titleList = GetNews("title");
+            var linkList = GetNews("link");
+
             this.News = new List<News>()
             {
-                new News(){Title=GetNews("title"),URL = GetNews("link")}
+                new News(){Title = titleList[0],URL = linkList[0]},
+                new News(){Title = titleList[1],URL = linkList[1]},
+                new News(){Title = titleList[2],URL = linkList[2]},
+                new News(){Title = titleList[3],URL = linkList[3]},
+                new News(){Title = titleList[4],URL = linkList[4]},
+                new News(){Title = titleList[5],URL = linkList[5]},
+                new News(){Title = titleList[6],URL = linkList[6]},
+                new News(){Title = titleList[7],URL = linkList[7]},
             };
         }
 
@@ -78,6 +86,9 @@
             string result = wc.DownloadString(url);
 
             XDocument xdoc = XDocument.Parse(result);
+
+            XElement element = XElement.Parse(result);
+
 
             var nodes = xdoc.Root.Descendants(name);
 

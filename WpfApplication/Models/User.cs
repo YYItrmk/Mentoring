@@ -6,6 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    /*
     public class User
     {
         public bool IsSelected { get; set; }
@@ -18,20 +19,32 @@
 
         
     }
+    */
 
+    /// <summary>
+    /// 天気
+    /// </summary>
     public class Weahter
     {
+        //都市名
         public string City { get; set; }
 
+        //今日の天気
         public string TODAY { get; set; }
 
+        //明日の天気
         public string TOMORROW { get; set; }
     }
     
+    /// <summary>
+    /// ニュース
+    /// </summary>
     public class News
     {
-        //できない
-        public string[] Title { get; set; }
-        public string[] URL { get; set; }
+        //タイトル
+        public string Title { get; set; }
+        
+        //URL
+        public string URL { get; set; }
     }
 }
