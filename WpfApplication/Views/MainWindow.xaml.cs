@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -25,6 +26,19 @@
             InitializeComponent();
         }
 
-
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var elem = e.MouseDevice.DirectlyOver as FrameworkElement;
+           
+            var array = elem.Parent.ToString().Split(':');
+                    
+             //暫定
+             if (array[1] != " http")
+              {
+                return;
+              }
+              string url = array[1]+":"+array[2];
+              Process.Start(url);
+        }
     }
 }
