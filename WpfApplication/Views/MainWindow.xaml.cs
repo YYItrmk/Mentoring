@@ -45,6 +45,7 @@
             NewsPreview page = new NewsPreview();
             NavigationService.Navigate(page);
 
+
         }
     }
 }
