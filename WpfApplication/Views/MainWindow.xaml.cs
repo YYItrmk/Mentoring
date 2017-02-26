@@ -28,6 +28,7 @@
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            /*
             var elem = e.MouseDevice.DirectlyOver as FrameworkElement;
            
             var array = elem.Parent.ToString().Split(':');
@@ -39,6 +40,11 @@
               }
               string url = array[1]+":"+array[2];
               Process.Start(url);
+             */
+
+            NewsPreview page = new NewsPreview();
+            NavigationService.Navigate(page);
+
         }
     }
 }
