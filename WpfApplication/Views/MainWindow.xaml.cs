@@ -15,6 +15,7 @@
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
+    using WpfApplication.ViewModels;
 
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
@@ -28,24 +29,27 @@
 
         private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            /*
-            var elem = e.MouseDevice.DirectlyOver as FrameworkElement;
-           
-            var array = elem.Parent.ToString().Split(':');
-                    
-             //暫定
-             if (array[1] != " http")
-              {
-                return;
-              }
-              string url = array[1]+":"+array[2];
-              Process.Start(url);
-             */
 
+            var a = DataGrid2.SelectedItem;
+            //不明
+            //var b = a.GetType().GetMember("URL").ElementAt(0);
+            if (a != null)
+            {
+               return;
+            }                     
             NewsPreview page = new NewsPreview();
-            NavigationService.Navigate(page);
-
-
+            //ここが不明
+            //NavigationService.Navigate(page);
+        }
+        
+        /// <summary>
+        /// 更新ボタン押下
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var mainViewModel = new MainViewModel();
         }
     }
 }
