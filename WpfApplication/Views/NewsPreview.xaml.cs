@@ -23,5 +23,14 @@ namespace WpfApplication.Views
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// ニュースをWebBrowserで表示する
+        /// </summary>
+        /// <param name="URL"></param>
+        public void showNews(string URL)
+        {
+            this.Browser1.Navigate(URL);
+        }
     }
 }

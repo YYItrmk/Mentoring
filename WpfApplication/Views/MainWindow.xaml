@@ -13,7 +13,7 @@
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TabItem Header="NEWS">
                 <Grid>
-                    <DataGrid Name="DataGrid2" Margin="10,8,10,2" ItemsSource="{Binding News }" IsReadOnly="True" MouseDoubleClick="DataGrid_MouseDoubleClick">
+                    <DataGrid Name="DataGrid2" Margin="10,8,10,10" ItemsSource="{Binding News }" IsReadOnly="True" SelectionChanged="DataGrid_SelectionChanged">
                     </DataGrid>
                     <Button Content="update" FontSize="13" Margin="451,4,13,354" Click="Button_Click" />
                 </Grid>

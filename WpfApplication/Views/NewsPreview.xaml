@@ -1,8 +1,8 @@
 ﻿<Window x:Class="WpfApplication.Views.NewsPreview"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="NewsPreview" Height="300" Width="300">
-    <Grid>
-        
+        Title="NewsPreview" Height="671" Width="690">
+    <Grid Margin="0,0,-80,-116">
+        <WebBrowser Name="Browser1" HorizontalAlignment="Left" Height="630" VerticalAlignment="Top" Width="679" Margin="0,10,0,0"/>
     </Grid>
 </Window>

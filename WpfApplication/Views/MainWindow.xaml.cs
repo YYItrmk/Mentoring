@@ -15,6 +15,7 @@
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
+    using WpfApplication.Models;
     using WpfApplication.ViewModels;
 
     /// <summary>
@@ -26,21 +27,6 @@
         {
             InitializeComponent();
         }
-
-        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-            var a = DataGrid2.SelectedItem;
-            //不明
-            //var b = a.GetType().GetMember("URL").ElementAt(0);
-            if (a != null)
-            {
-               return;
-            }                     
-            NewsPreview page = new NewsPreview();
-            //ここが不明
-            //NavigationService.Navigate(page);
-        }
         
         /// <summary>
         /// 更新ボタン押下
@@ -50,6 +36,19 @@
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var mainViewModel = new MainViewModel();
+        }
+        
+        /// <summary>
+        /// ニュースプレビューの呼び出し
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            News NewsItems = DataGrid2.SelectedItem as News;  
+            var NewsPreview = new NewsPreview(); 
+            NewsPreview.showNews(NewsItems.URL);
+            NewsPreview.Show();
         }
     }
 }
