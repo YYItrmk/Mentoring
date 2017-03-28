@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +31,23 @@ namespace WpfApplication.Views
         /// <param name="URL"></param>
         public void showNews(string URL)
         {
+            // IWebBrowser2 の取得 プロパティから
+            var axIWebBrowser2 = typeof(WebBrowser).GetProperty
+                ("AxIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic);
+            var comObj = axIWebBrowser2.GetValue(this.Browser1, null);
+
+            // 値の設定
+            comObj.GetType()
+                  .InvokeMember
+                  (
+                     "Silent",
+                     BindingFlags.SetProperty,
+                     null,
+                     comObj,
+                    new object[] { true });
+
+            //これはWindows.Formsでしかできない
+            //WebBrowser.scripterrorssuppressed = true;
             this.Browser1.Navigate(URL);
         }
     }
