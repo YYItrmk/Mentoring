@@ -37,13 +37,25 @@
     }
     
     /// <summary>
-    /// ニュース
+    /// 主要ニュース
     /// </summary>
-    public class News
+    public class PrimaryNews
     {
         //タイトル
         public string Title { get; set; }
         
+        //URL
+        public string URL { get; set; }
+    }
+
+    /// <summary>
+    /// エンタメニュース
+    /// </summary>
+    public class EntertainmentNews
+    {
+        //タイトル
+        public string Title { get; set; }
+
         //URL
         public string URL { get; set; }
     }

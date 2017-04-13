@@ -11,15 +11,23 @@
     </Window.DataContext>
     <Grid>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <TabItem Header="NEWS">
+            <TabItem Header="主要">
                 <Grid>
-                    <DataGrid Name="DataGrid2" ItemsSource="{Binding News }" 
+                    <DataGrid Name="DataGrid2" ItemsSource="{Binding primaryNews }" 
                               IsReadOnly="True" SelectionChanged="DataGrid_SelectionChanged" >
                     </DataGrid>
                     <Button Content="update" FontSize="10" Margin="457,0,7,358" Click="Button_Click" RenderTransformOrigin="0.507,0.667" Height="20" Width="20"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Weather ">
+            <TabItem Header="エンタメ">
+                <Grid>
+                    <DataGrid Name="DataGrid3" ItemsSource="{Binding entertainmentNews}" 
+                              IsReadOnly="True" SelectionChanged="DataGrid3_SelectionChanged" >
+                    </DataGrid>
+                    <Button Content="update" FontSize="10" Margin="457,0,7,358" Click="Button_Click" RenderTransformOrigin="0.507,0.667" Height="20" Width="20"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="天気">
                 <Grid>
                     <DataGrid Name="DataGrid1" Margin="10" ItemsSource="{Binding Path=Weahter }" IsReadOnly="True">
                     </DataGrid>

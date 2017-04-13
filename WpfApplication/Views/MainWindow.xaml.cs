@@ -45,8 +45,21 @@
         /// <param name="e"></param>
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            News NewsItems = DataGrid2.SelectedItem as News;  
+            PrimaryNews NewsItems = DataGrid2.SelectedItem as PrimaryNews;  
             var NewsPreview = new NewsPreview(); 
+            NewsPreview.showNews(NewsItems.URL);
+            NewsPreview.Show();
+        }
+
+        /// <summary>
+        /// ニュースプレビューの呼び出し
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGrid3_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           EntertainmentNews NewsItems = DataGrid3.SelectedItem as EntertainmentNews;
+            var NewsPreview = new NewsPreview();
             NewsPreview.showNews(NewsItems.URL);
             NewsPreview.Show();
         }

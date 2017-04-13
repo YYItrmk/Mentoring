@@ -45,9 +45,6 @@ namespace WpfApplication.Views
                      null,
                      comObj,
                     new object[] { true });
-
-            //これはWindows.Formsでしかできない
-            //WebBrowser.scripterrorssuppressed = true;
             this.Browser1.Navigate(URL);
         }
     }

@@ -13,29 +13,52 @@
     {
         public List<Weahter> Weahter { get; set; }
 
-        public List<News> News { get; set; }
+        public List<PrimaryNews> primaryNews { get; set; }
+        public List<EntertainmentNews> entertainmentNews { get; set; }
+
+        private string primaryNewsUrl = @"http://news.yahoo.co.jp/pickup/rss.xml";
+        private string entertainmentNewsUrl = @"https://news.yahoo.co.jp/pickup/entertainment/rss.xml";
+        //private string primaryNewsUrl = @"http://news.yahoo.co.jp/pickup/rss.xml";
 
         public MainViewModel()
         {
             this.Weahter = new List<Weahter>()
             {
+                new Weahter(){City = "札幌", TODAY = GetWeahter(1400,1),TOMORROW = GetWeahter(1400,2)},
+                new Weahter(){City = "仙台", TODAY = GetWeahter(3410,1),TOMORROW = GetWeahter(3410,2)},
                 new Weahter(){City = "東京", TODAY = GetWeahter(4410,1),TOMORROW = GetWeahter(4410,2)},
-                new Weahter(){City = "札幌", TODAY = GetWeahter(1400,1),TOMORROW = GetWeahter(1400,2)}
+                new Weahter(){City = "名古屋", TODAY = GetWeahter(5110,1),TOMORROW = GetWeahter(5110,2)},
+                new Weahter(){City = "大阪", TODAY = GetWeahter(6200,1),TOMORROW = GetWeahter(6200,2)},
+                new Weahter(){City = "福岡", TODAY = GetWeahter(8210,1),TOMORROW = GetWeahter(8210,2)}
             };
 
-            var titleList = GetNews("title");
-            var linkList = GetNews("link");
-
-            this.News = new List<News>()
+            //関数化
+            var titleList = GetNews("title",primaryNewsUrl);
+            var linkList = GetNews("link",primaryNewsUrl);
+            this.primaryNews = new List<PrimaryNews>()
             {
-                new News(){Title = titleList[0],URL = linkList[0]},
-                new News(){Title = titleList[1],URL = linkList[1]},
-                new News(){Title = titleList[2],URL = linkList[2]},
-                new News(){Title = titleList[3],URL = linkList[3]},
-                new News(){Title = titleList[4],URL = linkList[4]},
-                new News(){Title = titleList[5],URL = linkList[5]},
-                new News(){Title = titleList[6],URL = linkList[6]},
-                new News(){Title = titleList[7],URL = linkList[7]},
+                new PrimaryNews(){Title = titleList[0],URL = linkList[0]},
+                new PrimaryNews(){Title = titleList[1],URL = linkList[1]},
+                new PrimaryNews(){Title = titleList[2],URL = linkList[2]},
+                new PrimaryNews(){Title = titleList[3],URL = linkList[3]},
+                new PrimaryNews(){Title = titleList[4],URL = linkList[4]},
+                new PrimaryNews(){Title = titleList[5],URL = linkList[5]},
+                new PrimaryNews(){Title = titleList[6],URL = linkList[6]},
+                new PrimaryNews(){Title = titleList[7],URL = linkList[7]},
+            };
+
+            var titleList1 = GetNews("title", entertainmentNewsUrl);
+            var linkList1 = GetNews("link", entertainmentNewsUrl);
+            this.entertainmentNews = new List<EntertainmentNews>()
+            {
+                new EntertainmentNews(){Title = titleList1[0],URL = linkList1[0]},
+                new EntertainmentNews(){Title = titleList1[1],URL = linkList1[1]},
+                new EntertainmentNews(){Title = titleList1[2],URL = linkList1[2]},
+                new EntertainmentNews(){Title = titleList1[3],URL = linkList1[3]},
+                new EntertainmentNews(){Title = titleList1[4],URL = linkList1[4]},
+                new EntertainmentNews(){Title = titleList1[5],URL = linkList1[5]},
+                new EntertainmentNews(){Title = titleList1[6],URL = linkList1[6]},
+                new EntertainmentNews(){Title = titleList1[7],URL = linkList1[7]},
             };
         }
 
@@ -77,12 +100,17 @@
             }
         }
 
-        private string[] GetNews(string name)
+        /// <summary>
+        /// ニュースを取得する
+        /// </summary>
+        /// <param name="name">名前</param>
+        /// <returns></returns>
+        private string[] GetNews(string name,string URL)
         {
             WebClient wc = new WebClient();
             wc.Headers.Add("Content-type", "charset=UTF-8");
 
-            Uri url = new Uri(@"http://news.yahoo.co.jp/pickup/rss.xml");
+            Uri url = new Uri(URL);
             string result = wc.DownloadString(url);
 
             XDocument xdoc = XDocument.Parse(result);
